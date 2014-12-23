@@ -1,3 +1,5 @@
 .DS_Store
 assets/*
 protected/runtime/*
+upload/*
+pingpp-php/*
