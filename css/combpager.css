@@ -1,0 +1,73 @@
+/**
+ * CSS styles for CLinkPager.
+ *
+ * @author Qiang Xue <qiang.xue@gmail.com>
+ * @link http://www.yiiframework.com/
+ * @copyright Copyright &copy; 2008-2010 Yii Software LLC
+ * @license http://www.yiiframework.com/license/
+ * @version $Id: combpager.css 23114 2014-03-06 08:03:47Z lonestone $
+ * @since 1.0
+ */
+
+ul.yiiPager
+{
+	font-size:12px;
+	border:0;
+	margin:0;
+	padding:0;
+	line-height:100%;
+    overflow:hidden;
+}
+
+ul.yiiPager li
+{
+    float:left;
+    margin:0 2px;
+}
+
+ul.yiiPager a:link,
+ul.yiiPager a:visited
+{
+	border:solid 1px #9aafe5;
+	font-weight:bold;
+	color:#0e509e;
+	padding:1px 3px;
+    height:20px;
+    line-height:20px;
+    vertical-align:center;
+	text-decoration:none;
+}
+
+ul.yiiPager .page a
+{
+	font-weight:normal;
+}
+
+ul.yiiPager a:hover
+{
+	border:solid 1px #0e509e;
+}
+
+ul.yiiPager .selected a
+{
+	background:#2e6ab1;
+	color:#FFFFFF;
+	font-weight:bold;
+}
+
+ul.yiiPager .hidden 
+{
+	display:inline-block;
+}
+ul.yiiPager .hidden a
+{
+	border:solid 1px #DEDEDE;
+	color:#888888;
+}
+
+
+.combPager {text-align:left}
+.combPager .links {float:left;height:30px;}
+.combPager .jumpbox {float:left;height:30px;}
+.combPager .jumpbox .pagebox {width:30px;}
+.combPager .jumpbox .jumpbtn {height:22px; padding:0 0 2px 0; font-size:11px;}
