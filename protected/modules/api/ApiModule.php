@@ -6,6 +6,8 @@ class ApiModule extends CWebModule
 	{
 		// this method is called when the module is being created
 		// you may place code here to customize the module or the application
+		// 重写向api的错误
+		Yii::app()->errorHandler->errorAction = 'api/default/error';
 
 		// import the module-level models and components
 		$this->setImport(array(
@@ -13,6 +15,8 @@ class ApiModule extends CWebModule
 			'api.components.*',
 		));
 	}
+
+
 
 	public function beforeControllerAction($controller, $action)
 	{

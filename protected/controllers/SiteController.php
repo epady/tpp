@@ -20,6 +20,7 @@ class SiteController extends Controller
 	 */
 	public function actionError()
 	{
+		
 		$data['error'] = Yii::app()->errorHandler->error;
 		$this->_sendResponse(500,CJSON::encode($data));
 		
