@@ -1,36 +1,41 @@
 <?php
 
-class AreaController extends Controller
+class AreaController extends ApiController
 {
+
+	public $allow = array('index','get');
+
+
+	/**
+	 * 根据经纬度得知城市
+	 * 
+	 * @return [type] [description]
+	 */
+	public function actionGet()
+	{
+		
+	}
+
+
+
+	/**
+	 * 获取地区列表
+	 * 
+	 * @return [type] [description]
+	 */
 	public function actionIndex()
 	{
-		$this->render('index');
+		$data = array();
+
+		$models = Area::model()->findAll();
+		foreach($models as $item)
+		{
+			$data[] = array('id'=>$item->id,'name' =>$item->name);
+		}
+		$viewData['lists'] = $data;
+
+		$this->_sendResponse(200,$viewData);
 	}
 
-	// Uncomment the following methods and override them if needed
-	/*
-	public function filters()
-	{
-		// return the filter configuration for this controller, e.g.:
-		return array(
-			'inlineFilterName',
-			array(
-				'class'=>'path.to.FilterClass',
-				'propertyName'=>'propertyValue',
-			),
-		);
-	}
 
-	public function actions()
-	{
-		// return external action classes, e.g.:
-		return array(
-			'action1'=>'path.to.ActionClass',
-			'action2'=>array(
-				'class'=>'path.to.AnotherActionClass',
-				'propertyName'=>'propertyValue',
-			),
-		);
-	}
-	*/
 }

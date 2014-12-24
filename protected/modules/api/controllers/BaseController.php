@@ -1,36 +1,61 @@
 <?php
 
-class BaseController extends Controller
+class BaseController extends ApiController
 {
+
+	public $allow = array('index','view');
+
+
+
+	/**
+	 * 基地列表
+	 * 
+	 * @return [type] [description]
+	 */
 	public function actionIndex()
 	{
-		$this->render('index');
+		$data = array();
+
+		$models = Base::model()->findAll();
+
+		$baseArray = array();
+		foreach($models as $item)
+		{
+			$baseArray[] = $item->attributes;
+		}
+
+		$data['bases'] = $baseArray;
+
+		$this->_sendResponse(200, $data);
 	}
 
-	// Uncomment the following methods and override them if needed
-	/*
-	public function filters()
+
+	/**
+	 * 看查基地详情
+	 *
+	 * 
+	 * @return [type] [description]
+	 */
+	public function actionView($id)
 	{
-		// return the filter configuration for this controller, e.g.:
-		return array(
-			'inlineFilterName',
-			array(
-				'class'=>'path.to.FilterClass',
-				'propertyName'=>'propertyValue',
-			),
-		);
+			
+		$data = array();
+
+		$bases = Base::model()->findByPk($id);
+
+		if( $bases === null )
+		{
+			$data['message'] = '该ID数据不存在';
+
+			$this->_sendResponse(404,$data);
+		}
+
+		$data['base'] = $bases->attributes;
+
+
+		$this->_sendResponse(200, $data);
+
+
 	}
 
-	public function actions()
-	{
-		// return external action classes, e.g.:
-		return array(
-			'action1'=>'path.to.ActionClass',
-			'action2'=>array(
-				'class'=>'path.to.AnotherActionClass',
-				'propertyName'=>'propertyValue',
-			),
-		);
-	}
-	*/
 }

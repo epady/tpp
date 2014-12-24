@@ -45,7 +45,7 @@ class ApiController extends Controller
 		
 		if( isset($data['message']) && !in_array($this->action->id, $this->allow))
 		{
-			$this->_sendResponse(403,CJSON::encode($data));
+			$this->_sendResponse(403,$data);
 		}
 
 		return parent::beforeAction($action);
@@ -65,7 +65,7 @@ class ApiController extends Controller
 		$status_header = 'HTTP/1.1 ' . $status . ' ' . $this->_getStatusCodeMessage($status);
 		header($status_header);
 		header('Content-type: ' . $content_type);
-		echo $body;
+		echo CJSON::encode($body);
 		Yii::app()->end();
 	}
 
