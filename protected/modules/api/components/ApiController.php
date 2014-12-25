@@ -19,6 +19,8 @@ class ApiController extends Controller
 	 */
 	public $allow = array();
 
+	public $pageSize = 5;
+
 	/**
 	 * 验证订单信息
 	 * 

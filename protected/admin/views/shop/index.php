@@ -37,10 +37,9 @@ $this->menu=array(
 			'id',
 			'name',
 			'phone',
-			'password',
 			'email',
 			'area.name:地区',
-			'status',
+			'statusStr',
 			'created:datetime',
 			// 'updated',
 			

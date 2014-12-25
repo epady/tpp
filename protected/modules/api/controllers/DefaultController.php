@@ -19,10 +19,10 @@ class DefaultController extends ApiController
 	public function actionError()
 	{
 		$data['error'] = Yii::app()->errorHandler->error;
-		unset($data['error']['file']);
+		//unset($data['error']['file']);
 		unset($data['error']['trace']);
 		unset($data['error']['traces']);
-		$this->_sendResponse(500,CJSON::encode($data));
+		$this->_sendResponse(500,$data);
 		
 	}
 

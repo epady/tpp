@@ -42,6 +42,13 @@ class Shop extends CActiveRecord
 		);
 	}
 
+	public function getStatusStr()
+	{
+		$data = self::statusOptions();
+
+		return $data[$this->status];
+	}
+
 
 	/**
 	 * 时间处理
@@ -108,6 +115,7 @@ class Shop extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
+			'area' => array(self::BELONGS_TO,'Area','city_id'),
 		);
 	}
 
@@ -128,6 +136,7 @@ class Shop extends CActiveRecord
 			'image' => '背景',
 			'sign' => '签名',
 			'status' => '认证状态',
+			'statusStr' => '认证状态',
 			'created' => '添加时间',
 			'updated' => '更新时间',
 		);

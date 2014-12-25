@@ -1,59 +1,24 @@
 <?php
 
 /**
- * This is the model class for table "case".
+ * This is the model class for table "case_photos".
  *
- * The followings are the available columns in table 'case':
+ * The followings are the available columns in table 'case_photos':
  * @property integer $id
- * @property string $title
+ * @property integer $case_id
  * @property string $image
- * @property integer $shop_id
- * @property integer $city_id
- * @property string $content
+ * @property string $title
+ * @property integer $sort_order
  * @property integer $created
- * @property integer $updated
- * @property string $tags
  */
-class Cases extends CActiveRecord
+class CasePhotos extends CActiveRecord
 {
-	public $modelName = '案例表';
-
-	public function __toString()
-	{
-		return $this->title;
-	}
-
-
-
-	public function beforeSave()
-	{
-		if( $this->isNewRecord )
-		{
-			$this->created = $this->updated = time();
-		}else{
-			$this->updated = time();
-		}
-
-		$shop = Shop::model()->findByPk($this->shop_id);
-		if( $shop )
-		{
-			$this->city_id = $shop->city_id;
-		}
-
-
-		return parent::beforeSave();
-	}
-
-
-
-
-
 	/**
 	 * @return string the associated database table name
 	 */
 	public function tableName()
 	{
-		return 'case';
+		return 'case_photos';
 	}
 
 	/**
@@ -64,13 +29,12 @@ class Cases extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('title, image, tags', 'required'),
-			array('shop_id, city_id, created, updated', 'numerical', 'integerOnly'=>true),
-			array('title, image', 'length', 'max'=>255),
-			array('title, content', 'safe'),
+			array('case_id, image, title, created', 'required'),
+			array('case_id, sort_order, created', 'numerical', 'integerOnly'=>true),
+			array('image', 'length', 'max'=>255),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('id, title, image, shop_id, city_id, content, created, updated, tags', 'safe', 'on'=>'search'),
+			array('id, case_id, image, title, sort_order, created', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -82,8 +46,6 @@ class Cases extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
-			'shop' => array(self::BELONGS_TO,'Shop','shop_id'),
-			'area' => array(self::BELONGS_TO,'Area','city_id'),
 		);
 	}
 
@@ -94,14 +56,11 @@ class Cases extends CActiveRecord
 	{
 		return array(
 			'id' => 'ID',
-			'title' => '案例名字',
-			'image' => '首图',
-			'shop_id' => '所属摄影师',
-			'city_id' => '指定区域',
-			'content' => '描述',
-			'created' => '添加时间',
-			'updated' => '更新时间',
-			'tags' => '标签',
+			'case_id' => 'Case',
+			'image' => 'Image',
+			'title' => 'Title',
+			'sort_order' => 'Sort Order',
+			'created' => 'Created',
 		);
 	}
 
@@ -124,14 +83,11 @@ class Cases extends CActiveRecord
 		$criteria=new CDbCriteria;
 
 		$criteria->compare('id',$this->id);
-		$criteria->compare('title',$this->title,true);
+		$criteria->compare('case_id',$this->case_id);
 		$criteria->compare('image',$this->image,true);
-		$criteria->compare('shop_id',$this->shop_id);
-		$criteria->compare('city_id',$this->city_id);
-		$criteria->compare('content',$this->content,true);
+		$criteria->compare('title',$this->title,true);
+		$criteria->compare('sort_order',$this->sort_order);
 		$criteria->compare('created',$this->created);
-		$criteria->compare('updated',$this->updated);
-		$criteria->compare('tags',$this->tags,true);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
@@ -142,7 +98,7 @@ class Cases extends CActiveRecord
 	 * Returns the static model of the specified AR class.
 	 * Please note that you should have this exact method in all your CActiveRecord descendants!
 	 * @param string $className active record class name.
-	 * @return Cases the static model class
+	 * @return CasePhotos the static model class
 	 */
 	public static function model($className=__CLASS__)
 	{

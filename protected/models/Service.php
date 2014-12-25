@@ -76,7 +76,7 @@ class Service extends CActiveRecord
 		return array(
 			array('name, price, tags, hint, awaytime, dipian, content,shop_id', 'required'),
 			array('shop_id, city_id, photo_count, base_count, created, updated', 'numerical', 'integerOnly'=>true),
-			array('name, tags, hint', 'length', 'max'=>255),
+			array('name, image, tags, hint', 'length', 'max'=>255),
 			array('price', 'length', 'max'=>10),
 			array('awaytime', 'length', 'max'=>50),
 			array('dipian', 'length', 'max'=>30),
@@ -94,6 +94,8 @@ class Service extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
+			'shop' => array(self::BELONGS_TO,'Shop','shop_id'),
+			'area' => array(self::BELONGS_TO,'Area','city_id'),
 		);
 	}
 
@@ -105,6 +107,7 @@ class Service extends CActiveRecord
 		return array(
 			'id' => 'ID',
 			'name' => '服务标题',
+			'image' => '服务图片',
 			'shop_id' => '摄影师',
 			'city_id' => '指定区域',
 			'price' => '价格',
